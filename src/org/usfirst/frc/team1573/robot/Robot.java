@@ -3,8 +3,10 @@ package org.usfirst.frc.team1573.robot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -17,8 +19,9 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class Robot extends IterativeRobot {
     // Variables go here
 	Compressor comp = new Compressor();
-	Solenoid valve = new Solenoid(0);
-	CANTalon motor = new CANTalon(2);
+	DoubleSolenoid lifter = new DoubleSolenoid(0,1);
+	Solenoid gripper = new Solenoid(2);
+	RobotDrive drive = new RobotDrive(0,1);
 	Joystick joy = new Joystick(0);
 	
     /**
