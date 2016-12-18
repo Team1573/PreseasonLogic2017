@@ -1,9 +1,9 @@
 
 package org.usfirst.frc.team1573.robot;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -29,7 +29,8 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	
+    	//@SuppressWarnings("unused")
+		//TcpConnection tcp = new TcpConnection();
     }
     
 	/**
@@ -56,16 +57,24 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        // Motor speed control
-    	motor.set(joy.getRawAxis(0));
+        // Driving control
+    	drive.arcadeDrive(joy);
         
-        // Valve control
-        if (joy.getRawButton(0)) {
-        	valve.set(true);
+        // Lifter control
+        if (joy.getRawButton(11)) {
+        	lifter.set(Value.kForward);
+        } else if (joy.getRawButton(10)) {
+        	lifter.set(Value.kReverse);
+        }
+        
+        // Gripper control
+        if (joy.getRawButton(2)) {
+        	gripper.set(true);
         } else {
-        	valve.set(false);
+        	gripper.set(false);
         }
     }
+    
     
     /**
      * This function is called periodically during test mode
